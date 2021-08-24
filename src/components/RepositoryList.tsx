@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React, {  useState, useEffect } from "react"
 import { RepositoryItem } from "./RepositoryItem"
 
 import '../styles/repositories.scss'
 
+type Repository = {
+    name: string;
+    description: string;
+    html_url: string;
+}
+
 
 export function RepositoryList() {
-    const [repositories, setRepositories] = useState([]);
+    const [repositories, setRepositories] = useState<Repository[]>([]);
 
     // consumindo a api do git
     useEffect(() => {
@@ -19,9 +25,9 @@ export function RepositoryList() {
             <h1>Lista de repositorio</h1>
 
             <ul>
-                {repositories.map(repository => {
+                {repositories.map(repository => (
                     <RepositoryItem key={repository.name} repository={repository} />
-                })}
+                    ))}
             </ul>
         </section>
     )
